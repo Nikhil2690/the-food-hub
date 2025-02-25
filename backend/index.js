@@ -6,8 +6,8 @@ const mongoDB = require("./db")
 mongoDB();
 
 const allowedOrigins = [
+    "https://the-food-hub26.netlify.app",
     "http://localhost:5173",
-    "https://the-food-hub26.netlify.app"
 ];
 
 app.use(cors({
