@@ -8,21 +8,33 @@ const Home =() => {
   const [search, setSearch] = useState("");
   const [foodCat, setFoodCat] = useState([]);
   const [foodItem, setFoodItem] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const loadData = async ()=> {
-    let response  = await fetch("https://the-food-hub-oozu.onrender.com/api/foodData",{
+
+    try{let response  = await fetch("https://the-food-hub-oozu.onrender.com/api/foodData",{
       method: 'POST',
       headers:{
         'Content-Type':"application/json"
       }
     });
 
+    if(!response.ok){
+      throw new Error("failed to fetch data. please try again later")
+    }
+
     response = await response.json()
     
     setFoodItem(response[0])
     setFoodCat(response[1])
-    // console.log(response[0],response[1])
+  } catch(err){
+    setError(err.message);
+  } finally{
+    setLoading(false);
   }
+
+}
 
   useEffect(() => {
     loadData();
@@ -63,37 +75,47 @@ const Home =() => {
   </button>
   </div> 
 </div>
-        <div className="m-3 container">   
-            {
-              foodCat.length > 0
-              ? foodCat.map((data) =>{
-                return (
-                <div className="row mb-3"
-                  key={data._id}>
-                  <div key={data._id} className="fs-3 m-3">
-                    {data.CategoryName}
-                  </div>
-                  <hr/>
-                  {
-                  foodItem.length > 0 ? 
-                  foodItem.filter((item) => (item.CategoryName === data.CategoryName) && (item.name.toLowerCase().includes(search.toLowerCase())))
-                  .map(filteredItems =>{
-                    return(
-                    <div key={filteredItems._id} className="col-12 col-md-6 col-lg-3">
-                        <Card foodItem = {filteredItems}
-                        options={filteredItems.options[0]}
-                        />
+          {
+            loading ? (
+              <div style={{display: "flex", 
+                justifyContent: "center", 
+                alignItems: "center", 
+                height: "100vh"}}>
+                <h2>Loading...</h2>
+              </div>
+            ) : error ? (
+              <h2 style={{ color: "red" }}>{error}</h2>
+            ) : (
+              <div className="m-3 container">
+                {foodCat.length > 0 ? (
+                  foodCat.map((data) => (
+                    <div className="row mb-3" key={data._id}>
+                      <div className="fs-3 m-3">{data.CategoryName}</div>
+                      <hr />
+                      {foodItem.length > 0 ? (
+                        foodItem
+                          .filter(
+                            (item) =>
+                              item.CategoryName === data.CategoryName &&
+                              item.name.toLowerCase().includes(search.toLowerCase())
+                          )
+                          .map((filteredItems) => (
+                            <div key={filteredItems._id} className="col-12 col-md-6 col-lg-3">
+                              <Card foodItem={filteredItems} options={filteredItems.options[0]} />
+                            </div>
+                          ))
+                      ) : (
+                        <div>No such Data Found</div>
+                      )}
                     </div>
-                    )
-                  })
-                  : <div> No such Data Found </div>
-                  }
-                  </div>
-                )
-              })
-              : ""
-            }
-        </div>
+                  ))
+                ) : (
+                  <h2>No data available</h2>
+                )}
+              </div>
+            )
+          };
+  
         
         <div>   <Footer />  </div>
       
