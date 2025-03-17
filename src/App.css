@@ -1,5 +1,27 @@
+.html, .body{
+  font-family: "Outfit", sans-serif;  
+}
 
-.custom-heading {
-    font-family: "Playwrite IT Moderna", serif !important;
-    font-weight: 400;
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.font-outfit {
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+  }
+
+  .bg-custom {
+    background-color: #7E343E !important;
+  }
+  
+  .bg-russet {
+    background-color: #B73407
+  }
+
+  .animate-hover {
+    transition: transform 0.3s ease-in-out;
+  }
+  .animate-hover:hover {
+    transform: scale(1.05);
   }

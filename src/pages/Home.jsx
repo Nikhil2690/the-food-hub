@@ -90,7 +90,7 @@ const Home =() => {
                 {foodCat.length > 0 ? (
                   foodCat.map((data) => (
                     <div className="row mb-3" key={data._id}>
-                      <div className="fs-3 m-3">{data.CategoryName}</div>
+                      <div className="fs-3 m-3 font-outfit">{data.CategoryName}</div>
                       <hr />
                       {foodItem.length > 0 ? (
                         foodItem
@@ -114,7 +114,7 @@ const Home =() => {
                 )}
               </div>
             )
-          };
+          }
   
         
         <div>   <Footer />  </div>

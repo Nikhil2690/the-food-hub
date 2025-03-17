@@ -48,12 +48,12 @@ const Card = (props) => {
 
   return (
     <div>
-  <div className="card mt-3 bg-dark border border-light-subtle w-100" style={{ width: "18rem", maxHeight: "360px" }}>
+  <div className="card mt-3 bg-dark border border-light-subtle w-100 animate-hover" style={{ width: "18rem", maxHeight: "360px" }}>
     <img src={props.foodItem.img} className="card-img-top img-fluid object-fit: cover" alt="..." style={{height:"190px", objectFit:"fill"}} />
     <div className="card-body">
-      <h5 className="card-title text-white">{props.foodItem.name}</h5>
-      <div className="container w-100">
-        <select className="m-2 h-100 bg-warning rounded" onChange={(e) => setQty(e.target.value)}>
+      <h5 className="card-title text-white font-outfit">{props.foodItem.name}</h5>
+      <div className="container w-100 ">
+        <select className="m-2 h-100 bg-russet rounded" onChange={(e) => setQty(e.target.value)}>
           {Array.from(Array(6), (e, i) => {
             return (
               <option key={i + 1} value={i + 1}>
@@ -63,7 +63,7 @@ const Card = (props) => {
           })}
         </select>
 
-        <select className="m-2 h-100 bg-warning rounded" ref={priceRef} onChange={(e) => setSize(e.target.value)}>
+        <select className="m-2 h-100 bg-russet rounded" ref={priceRef} onChange={(e) => setSize(e.target.value)}>
           {
             priceOptions.map((data) => {
               return <option key={data} value={data}> {data} </option>
@@ -78,7 +78,7 @@ const Card = (props) => {
     </div>
     <hr className="border border-info-subtle m-0"/>
     <div className="card-footer bg-dark border-top-0 ps-3 pb-2">
-      <button className="btn btn-success" onClick={handleAddToCart}>Add To Cart</button>
+      <button className="btn btn-success " onClick={handleAddToCart}><span className="font-outfit">Add To Cart</span></button>
     </div>
   </div>
 </div>

@@ -18,11 +18,11 @@ const Navbar = () => {
   return (
     <div>
       <nav
-        className="navbar navbar-expand-lg navbar-dark bg-success
+        className="navbar navbar-expand-lg navbar-dark bg-custom
 "
       >
         <div className="container-fluid">
-          <Link className="navbar-brand fs-1 custom-heading" to="/">
+          <Link className="navbar-brand fs-1 font-outfit" to="/">
             FOOD HUB
           </Link>
           <button
@@ -36,17 +36,17 @@ const Navbar = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav me-auto mb-2">
+          <div className="collapse navbar-collapse " id="navbarNav">
+            <ul className="navbar-nav me-auto mb-2 ms-5 mt-2">
               <li className="nav-item">
-                <Link className="nav-link active fs-5" aria-current="page" to="/">
+                <Link className="nav-link active fs-5 font-outfit" aria-current="page" to="/">
                   Home
                 </Link>
               </li>
 
               {(localStorage.getItem("authToken"))
               ? <li className="nav-item">
-              <Link className="nav-link active fs-5" aria-current="page" to="/myorder">
+              <Link className="nav-link active fs-5 font-outfit" aria-current="page" to="/myorder">
                 My Orders
               </Link>
             </li>
@@ -62,14 +62,14 @@ const Navbar = () => {
               </div>
               : 
             <div>
-                <div className="btn bg-white text-success mx-2" onClick={() => {setCartView(true)}}>
-                  My Cart {" "}
+                <div className="btn bg-white text-success mx-2 fw-bold " onClick={() => {setCartView(true)}}>
+                  <span className="font-outfit">My Cart {" "}</span>
                   <Badge pill bg="danger">{data.length}</Badge>
                 </div>
                 {cartView? <Modal onClose={() => setCartView(false)}> <Cart/> </Modal> : null}
 
-                <div className="btn bg-white text-danger mx-2" onClick={handleLogout}>
-                  Logout
+                <div className="btn bg-white text-danger mx-2 fw-bold" onClick={handleLogout}>
+                <span className="font-outfit">Logout</span>
                 </div>
             </div>
             } 
